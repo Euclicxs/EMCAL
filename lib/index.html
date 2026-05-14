@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EMCAL - ELECTRICITY & MAGNETISM SOLVER </title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='12' fill='%232196f3' opacity='0.9'/><circle cx='50' cy='50' r='28' fill='none' stroke='%23ffb830' stroke-width='2' opacity='0.6'/><circle cx='50' cy='50' r='40' fill='none' stroke='%2300c853' stroke-width='2' opacity='0.4'/><circle cx='50' cy='50' r='52' fill='none' stroke='%23ff4d9e' stroke-width='2' opacity='0.3'/><circle cx='78' cy='50' r='4' fill='%232196f3'/><circle cx='32' cy='50' r='4' fill='%2300c853'/><circle cx='50' cy='22' r='4' fill='%23ff4d9e'/></svg>">
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+  <!-- ── NAVBAR ── -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <svg class="brand-icon" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Nucleus -->
+        <circle cx="50" cy="50" r="12" fill="#2196f3" opacity="0.9"/>
+        
+        <!-- Electron orbits -->
+        <circle cx="50" cy="50" r="28" fill="none" stroke="#ffb830" stroke-width="2" opacity="0.6"/>
+        <circle cx="50" cy="50" r="40" fill="none" stroke="#00c853" stroke-width="2" opacity="0.4"/>
+        <circle cx="50" cy="50" r="52" fill="none" stroke="#ff4d9e" stroke-width="2" opacity="0.3"/>
+        
+        <!-- Electrons -->
+        <circle cx="78" cy="50" r="4" fill="#2196f3"/>
+        <circle cx="32" cy="50" r="4" fill="#00c853"/>
+        <circle cx="50" cy="22" r="4" fill="#ff4d9e"/>
+      </svg>
+      <span class="brand-text">EM Calculator</span>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home"        class="nav-link active" data-section="home">Home</a></li>
+      <li><a href="#formulas"    class="nav-link" data-section="formulas">Formulas</a></li>
+      <li><a href="#electricity" class="nav-link" data-section="electricity">Electricity</a></li>
+      <li><a href="#magnetism"   class="nav-link" data-section="magnetism">Magnetism</a></li>
+      <li><a href="#problems"    class="nav-link" data-section="problems">Problems</a></li>
+      <li><a href="#about"       class="nav-link" data-section="about">About</a></li>
+    </ul>
+  </nav>
+
+  <!-- SECTION 1 — HOME -->
+  <section id="home" class="section active">
+    <div class="hero">
+      <div class="hero-bg">
+        <div class="grid-overlay"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-badge">Interactive Physics Tools</div>
+        <h1 class="hero-title">
+          Electricity &amp;<br/>
+          <span class="gradient-text">Magnetism</span><br/>
+          Solver
+        </h1>
+        <p class="hero-sub">
+          A complete toolkit for solving E&amp;M problems — from Coulomb's Law to Magnetic Force.
+          Plug in your values and get instant, accurate results with step-by-step explanations.
+        </p>
+        <div class="hero-actions">
+          <button class="btn btn-primary" onclick="navigateTo('electricity')">Start Calculating</button>
+          <button class="btn btn-ghost" onclick="navigateTo('formulas')">View Formulas</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><span class="stat-num">9</span><span class="stat-label">Formulas</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num">7</span><span class="stat-label">Calculators</span></div>
+          <div class="stat-divider"></div>
+          <div class="stat"><span class="stat-num">6</span><span class="stat-label">Sample Problems</span></div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="circuit-card">
+          <div class="circuit-label">Ohm's Law</div>
+          <div class="circuit-formula">V = I × R</div>
+          <div class="circuit-vars">
+            <div class="var"><span class="var-sym">V</span><span class="var-name">Voltage</span></div>
+            <div class="var"><span class="var-sym">I</span><span class="var-name">Current</span></div>
+            <div class="var"><span class="var-sym">R</span><span class="var-name">Resistance</span></div>
+          </div>
+        </div>
+        <div class="circuit-card card-2">
+          <div class="circuit-label">Coulomb's Law</div>
+          <div class="circuit-formula small">F = kq₁q₂ / r²</div>
+          <div class="circuit-vars">
+            <div class="var"><span class="var-sym">k</span><span class="var-name">8.99×10⁹</span></div>
+            <div class="var"><span class="var-sym">F</span><span class="var-name">Force (N)</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">🔢</div>
+        <h3>Instant Results</h3>
+        <p>Enter your values and get answers with correct SI units immediately.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📐</div>
+        <h3>Formula Guide</h3>
+        <p>Every formula shown with symbols, units, and plain-language explanations.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🧪</div>
+        <h3>Sample Problems</h3>
+        <p>Walk through worked examples with full step-by-step solutions.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Mobile-Ready</h3>
+        <p>Fully responsive layout — use it on any device, anywhere.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 — FORMULA GUIDE -->
+  <section id="formulas" class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-badge">Reference</div>
+        <h2 class="section-title">Formula Guide</h2>
+        <p class="section-sub">Essential Electricity &amp; Magnetism formulas with symbols, units, and descriptions.</p>
+      </div>
+      <div class="formula-grid">
+
+        <div class="formula-card">
+          <div class="formula-topic">Electric Charge</div>
+          <div class="formula-eq">Q = ne</div>
+          <div class="formula-table">
+            <div class="ft-row"><span class="ft-sym">Q</span><span class="ft-desc">Electric charge</span><span class="ft-unit">Coulombs (C)</span></div>
+            <div class="ft-row"><span class="ft-sym">n</span><span class="ft-desc">Number of electrons</span><span class="ft-unit">dimensionless</span></div>
+            <div class="ft-row"><span class="ft-sym">e</span><span class="ft-desc">Elementary charge</span><span class="ft-unit">1.6×10⁻¹⁹ C</span></div>
+          </div>
+          <p class="formula-note">The total charge is the count of electrons multiplied by the fundamental charge of one electron.</p>
+        </div>
+
+        <div class="formula-card">
+          <div class="formula-topic">Coulomb's Law</div>
+          <div class="formula-eq">F = kq₁q₂ / r²</div>
+          <div class="formula-table">
+            <div class="ft-row"><span class="ft-sym">F</span><span class="ft-desc">Electrostatic force</span><span class="ft-unit">Newtons (N)</span></div>
+            <div class="ft-row"><span class="ft-sym">k</span><span class="ft-desc">Coulomb's constant</span><span class="ft-unit">8.99×10⁹ N·m²/C²</span></div>
+            <div class="ft-row"><span class="ft-sym">q₁,q₂</span><span class="ft-desc">Charges</span><span class="ft-unit">Coulombs (C)</span></div>
+            <div class="ft-row"><span class="ft-sym">r</span><span class="ft-desc">Distance between charges</span><span class="ft-unit">Meters (m)</span></div>
+          </div>
+          <p class="formula-note">Describes the force between two point charges; inversely proportional to the square of distance.</p>
+        </div>
+
+        <div class="formula-card">
+          <div class="formula-topic">Electric Field</div>
+          <div class="formula-eq">E = F/q &nbsp;|&nbsp; E = kQ/r²</div>
+          <div class="formula-table">
+            <div class="ft-row"><span class="ft-sym">E</span><span class="ft-desc">Electric field strength</span><span class="ft-unit">N/C or V/m</span></div>
+            <div class="ft-row"><span class="ft-sym">F</span><span class="ft-desc">Force on test charge</span><span class="ft-unit">Newtons (N)</span></div>
+            <div class="ft-row"><span class="ft-sym">q</span><span class="ft-desc">Test charge</span><span class="ft-unit">Coulombs (C)</span></div>
+          </div>
+          <p class="formula-note">The electric field is the force per unit charge experienced by a small positive test charge.</p>
+        </div>
+
+        <div class="formula-card">
+          <div class="formula-topic">Ohm's Law</div>
+          <div class="formula-eq">V = IR</div>
+          <div class="formula-table">
+            <div class="ft-row"><span class="ft-sym">V</span><span class="ft-desc">Voltage</span><span class="ft-unit">Volts (V)</span></div>
+            <div class="ft-row"><span class="ft-sym">I</span><span class="ft-desc">Current</span><span class="ft-unit">Amperes (A)</span></div>
+            <div class="ft-row"><span class="ft-sym">R</span><span class="ft-desc">Resistance</span><span class="ft-unit">Ohms (Ω)</span></div>
+          </div>
+          <p class="formula-note">The voltage across a conductor equals the current through it times its resistance.</p>
+        </div>
+
+        <div class="formula-card">
+          <div class="formula-topic">Electric Power</div>
+          <div class="formula-eq">P = VI</div>
+          <div class="formula-table">
+            <div class="ft-row"><span class="ft-sym">P</span><span class="ft-desc">Electric power</span><span class="ft-unit">Watts (W)</span></div>
+            <div class="ft-row"><span class="ft-sym">V</span><span class="ft-desc">Voltage</span><span class="ft-unit">Volts (V)</span></div>
+            <div class="ft-row"><span class="ft-sym">I</span><span class="ft-desc">Current</span><span class="ft-unit">Amperes (A)</span></div>
+          </div>
+          <p class="formula-note">Power is the rate of energy transfer; equals voltage multiplied by current.</p>
+        </div>
+
+        <div class="formula-card">
+          <div class="formula-topic">Resistance</div>
+          <div class="formula-eq">R = V / I</div>
+          <div class="formula-table">
+            <div class="ft-row"><span class="ft-sym">R</span><span class="ft-desc">Resistance</span><span class="ft-unit">Ohms (Ω)</span></div>
+            <div class="ft-row"><span class="ft-sym">V</span><span class="ft-desc">Voltage</span><span class="ft-unit">Volts (V)</span></div>
+            <div class="ft-row"><span class="ft-sym">I</span><span class="ft-desc">Current</span><span class="ft-unit">Amperes (A)</span></div>
+          </div>
+          <p class="formula-note">Resistance is the opposition to current flow; derived from Ohm's Law.</p>
+        </div>
+
+        <div class="formula-card">
+          <div class="formula-topic">Series Resistance</div>
+          <div class="formula-eq">R<sub>total</sub> = R₁ + R₂ + R₃ + …</div>
+          <div class="formula-table">
+            <div class="ft-row"><span class="ft-sym">Rₜ</span><span class="ft-desc">Total resistance</span><span class="ft-unit">Ohms (Ω)</span></div>
+            <div class="ft-row"><span class="ft-sym">R₁…</span><span class="ft-desc">Individual resistors</span><span class="ft-unit">Ohms (Ω)</span></div>
+            <div class="ft-row"><span class="ft-sym">I</span><span class="ft-desc">Same through all</span><span class="ft-unit">Amperes (A)</span></div>
+          </div>
+          <p class="formula-note">In series, resistances add directly. The same current flows through every component.</p>
+        </div>
+
+        <div class="formula-card">
+          <div class="formula-topic">Parallel Resistance</div>
+          <div class="formula-eq">1/R<sub>total</sub> = 1/R₁ + 1/R₂ + …</div>
+          <div class="formula-table">
+            <div class="ft-row"><span class="ft-sym">Rₜ</span><span class="ft-desc">Total resistance</span><span class="ft-unit">Ohms (Ω)</span></div>
+            <div class="ft-row"><span class="ft-sym">R₁…</span><span class="ft-desc">Individual resistors</span><span class="ft-unit">Ohms (Ω)</span></div>
+            <div class="ft-row"><span class="ft-sym">V</span><span class="ft-desc">Same across all</span><span class="ft-unit">Volts (V)</span></div>
+          </div>
+          <p class="formula-note">In parallel, the total resistance is always less than the smallest individual resistor.</p>
+        </div>
+
+        <div class="formula-card">
+          <div class="formula-topic">Magnetic Force</div>
+          <div class="formula-eq">F = BIL sin θ &nbsp;|&nbsp; F = qvB sin θ</div>
+          <div class="formula-table">
+            <div class="ft-row"><span class="ft-sym">B</span><span class="ft-desc">Magnetic field strength</span><span class="ft-unit">Tesla (T)</span></div>
+            <div class="ft-row"><span class="ft-sym">I</span><span class="ft-desc">Current</span><span class="ft-unit">Amperes (A)</span></div>
+            <div class="ft-row"><span class="ft-sym">L</span><span class="ft-desc">Length of conductor</span><span class="ft-unit">Meters (m)</span></div>
+            <div class="ft-row"><span class="ft-sym">θ</span><span class="ft-desc">Angle between B and current</span><span class="ft-unit">Degrees (°)</span></div>
+          </div>
+          <p class="formula-note">Force on a current-carrying wire (or moving charge) in a magnetic field; zero when parallel.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 — ELECTRICITY CALCULATORS -->
+  <section id="electricity" class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-badge">⚡ Electricity</div>
+        <h2 class="section-title">Electricity Calculators</h2>
+        <p class="section-sub">Interactive tools for charge, voltage, current, resistance, power, electric field, Coulomb's Law, and circuit configurations.</p>
+      </div>
+      <div class="calc-grid">
+
+        <!-- Ohm's Law -->
+        <div class="calc-card" id="calc-ohm">
+          <div class="calc-header">
+            <div class="calc-icon">🔌</div>
+            <div>
+              <div class="calc-title">Ohm's Law Calculator</div>
+              <div class="calc-formula-tag">V = I × R</div>
+            </div>
+          </div>
+          <p class="calc-desc">Solve for voltage, current, or resistance. Leave the field you want to find empty.</p>
+          <div class="calc-body">
+            <div class="input-group">
+              <label>Voltage (V) <span class="unit-tag">Volts</span></label>
+              <input type="number" id="ohm-V" placeholder="Leave blank to solve" step="any" />
+            </div>
+            <div class="input-group">
+              <label>Current (I) <span class="unit-tag">Amperes</span></label>
+              <input type="number" id="ohm-I" placeholder="Leave blank to solve" step="any" />
+            </div>
+            <div class="input-group">
+              <label>Resistance (R) <span class="unit-tag">Ohms Ω</span></label>
+              <input type="number" id="ohm-R" placeholder="Leave blank to solve" step="any" />
+            </div>
+            <button class="calc-btn" onclick="calcOhm()">Calculate</button>
+            <div class="result-box" id="ohm-result"></div>
+          </div>
+        </div>
+
+        <!-- Electric Power -->
+        <div class="calc-card" id="calc-power">
+          <div class="calc-header">
+            <div class="calc-icon">💡</div>
+            <div>
+              <div class="calc-title">Electric Power Calculator</div>
+              <div class="calc-formula-tag">P = V × I &nbsp;|&nbsp; P = I²R &nbsp;|&nbsp; P = V²/R</div>
+            </div>
+          </div>
+          <p class="calc-desc">Compute power using voltage and current, or other combinations.</p>
+          <div class="calc-body">
+            <div class="input-group">
+              <label>Voltage (V) <span class="unit-tag">Volts</span></label>
+              <input type="number" id="pwr-V" placeholder="e.g. 120" step="any" />
+            </div>
+            <div class="input-group">
+              <label>Current (I) <span class="unit-tag">Amperes</span></label>
+              <input type="number" id="pwr-I" placeholder="e.g. 2" step="any" />
+            </div>
+            <div class="input-group">
+              <label>Resistance (R) <span class="unit-tag">Ohms Ω</span> <em class="optional">optional</em></label>
+              <input type="number" id="pwr-R" placeholder="optional" step="any" />
+            </div>
+            <button class="calc-btn" onclick="calcPower()">Calculate</button>
+            <div class="result-box" id="pwr-result"></div>
+          </div>
+        </div>
+
+        <!-- Coulomb's Law -->
+        <div class="calc-card" id="calc-coulomb">
+          <div class="calc-header">
+            <div class="calc-icon">⚛️</div>
+            <div>
+              <div class="calc-title">Coulomb's Law Calculator</div>
+              <div class="calc-formula-tag">F = kq₁q₂ / r²</div>
+            </div>
+          </div>
+          <p class="calc-desc">Calculate the electrostatic force between two charges.</p>
+          <div class="calc-body">
+            <div class="input-group">
+              <label>Charge 1 (q₁) <span class="unit-tag">Coulombs C</span></label>
+              <input type="number" id="coul-q1" placeholder="e.g. 2e-6" step="any" />
+            </div>
+            <div class="input-group">
+              <label>Charge 2 (q₂) <span class="unit-tag">Coulombs C</span></label>
+              <input type="number" id="coul-q2" placeholder="e.g. -3e-6" step="any" />
+            </div>
+            <div class="input-group">
+              <label>Distance (r) <span class="unit-tag">Meters</span></label>
+              <input type="number" id="coul-r" placeholder="e.g. 0.05" step="any" />
+            </div>
+            <button class="calc-btn" onclick="calcCoulomb()">Calculate</button>
+            <div class="result-box" id="coul-result"></div>
+          </div>
+        </div>
+
+        <!-- Electric Field -->
+        <div class="calc-card" id="calc-efield">
+          <div class="calc-header">
+            <div class="calc-icon">🌐</div>
+            <div>
+              <div class="calc-title">Electric Field Calculator</div>
+              <div class="calc-formula-tag">E = F/q &nbsp;|&nbsp; E = kQ/r²</div>
+            </div>
+          </div>
+          <p class="calc-desc">Choose a method: force per charge, or field due to a point charge.</p>
+          <div class="calc-body">
+            <div class="method-tabs">
+              <button class="method-tab active" onclick="switchEfieldMethod('fq', this)">E = F / q</button>
+              <button class="method-tab" onclick="switchEfieldMethod('kQ', this)">E = kQ / r²</button>
+            </div>
+            <div id="efield-fq">
+              <div class="input-group">
+                <label>Force (F) <span class="unit-tag">Newtons</span></label>
+                <input type="number" id="ef-F" placeholder="e.g. 0.5" step="any" />
+              </div>
+              <div class="input-group">
+                <label>Test Charge (q) <span class="unit-tag">Coulombs</span></label>
+                <input type="number" id="ef-q" placeholder="e.g. 1e-6" step="any" />
+              </div>
+            </div>
+            <div id="efield-kQ" style="display:none">
+              <div class="input-group">
+                <label>Source Charge (Q) <span class="unit-tag">Coulombs</span></label>
+                <input type="number" id="ef-Q" placeholder="e.g. 5e-6" step="any" />
+              </div>
+              <div class="input-group">
+                <label>Distance (r) <span class="unit-tag">Meters</span></label>
+                <input type="number" id="ef-r" placeholder="e.g. 0.1" step="any" />
+              </div>
+            </div>
+            <button class="calc-btn" onclick="calcEfield()">Calculate</button>
+            <div class="result-box" id="ef-result"></div>
+          </div>
+        </div>
+
+        <!-- Electric Charge -->
+        <div class="calc-card" id="calc-charge">
+          <div class="calc-header">
+            <div class="calc-icon">🔋</div>
+            <div>
+              <div class="calc-title">Electric Charge Calculator</div>
+              <div class="calc-formula-tag">Q = ne</div>
+            </div>
+          </div>
+          <p class="calc-desc">Find total charge from the number of electrons, or vice versa.</p>
+          <div class="calc-body">
+            <div class="input-group">
+              <label>Total Charge (Q) <span class="unit-tag">Coulombs</span></label>
+              <input type="number" id="chg-Q" placeholder="Leave blank to solve" step="any" />
+            </div>
+            <div class="input-group">
+              <label>Number of Electrons (n)</label>
+              <input type="number" id="chg-n" placeholder="Leave blank to solve" step="any" />
+            </div>
+            <p class="calc-note">e = 1.602 × 10⁻¹⁹ C (elementary charge)</p>
+            <button class="calc-btn" onclick="calcCharge()">Calculate</button>
+            <div class="result-box" id="chg-result"></div>
+          </div>
+        </div>
+
+        <!-- Series & Parallel Resistance -->
+        <div class="calc-card wide-card" id="calc-series-parallel">
+          <div class="calc-header">
+            <div class="calc-icon">🔗</div>
+            <div>
+              <div class="calc-title">Series &amp; Parallel Resistance Calculator</div>
+              <div class="calc-formula-tag">Series: Rₜ = R₁+R₂+… &nbsp;|&nbsp; Parallel: 1/Rₜ = 1/R₁+1/R₂+…</div>
+            </div>
+          </div>
+          <p class="calc-desc">Enter up to 6 resistors. Switch between series and parallel mode to get the total resistance, individual voltage drops, and current through each branch.</p>
+          <div class="calc-body">
+            <div class="method-tabs">
+              <button class="method-tab active" id="sp-tab-series" onclick="switchSPMode('series', this)">⬛ Series</button>
+              <button class="method-tab" id="sp-tab-parallel" onclick="switchSPMode('parallel', this)">⬜ Parallel</button>
+            </div>
+            <div class="circuit-diagram-wrap">
+              <svg id="sp-diagram" viewBox="0 0 600 120" xmlns="http://www.w3.org/2000/svg"></svg>
+            </div>
+            <div class="sp-supply-row">
+              <div class="input-group" style="max-width:220px">
+                <label>Supply Voltage (Vs) <span class="unit-tag">Volts</span> <em class="optional">optional</em></label>
+                <input type="number" id="sp-Vs" placeholder="e.g. 12" step="any" />
+              </div>
+              <p class="calc-note" style="align-self:flex-end;padding-bottom:4px;">Used to calculate current &amp; power. Leave blank for resistance only.</p>
+            </div>
+            <div class="sp-resistors-label">
+              Resistors <span class="text-accent" id="sp-count-label">(2 of 6)</span>
+            </div>
+            <div class="sp-resistors-grid" id="sp-resistors-grid"></div>
+            <div class="sp-add-remove">
+              <button class="sp-ctrl-btn" id="sp-add-btn" onclick="spAddResistor()">+ Add Resistor</button>
+              <button class="sp-ctrl-btn sp-ctrl-danger" id="sp-remove-btn" onclick="spRemoveResistor()">− Remove</button>
+            </div>
+            <button class="calc-btn" onclick="calcSeriesParallel()">Calculate</button>
+            <div class="result-box" id="sp-result"></div>
+            <div id="sp-breakdown" class="sp-breakdown" style="display:none"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 — MAGNETISM CALCULATORS -->
+  <section id="magnetism" class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-badge">🧲 Magnetism</div>
+        <h2 class="section-title">Magnetism Calculators</h2>
+        <p class="section-sub">Calculate magnetic forces on current-carrying conductors and moving charges.</p>
+      </div>
+      <div class="calc-grid">
+
+        <div class="calc-card wide-card" id="calc-magforce">
+          <div class="calc-header">
+            <div class="calc-icon">🧲</div>
+            <div>
+              <div class="calc-title">Magnetic Force Calculator</div>
+              <div class="calc-formula-tag">F = BIL sin θ &nbsp;|&nbsp; F = qvB sin θ</div>
+            </div>
+          </div>
+          <p class="calc-desc">Two modes: force on a current-carrying wire, or force on a moving charge.</p>
+          <div class="calc-body">
+            <div class="method-tabs">
+              <button class="method-tab active" onclick="switchMagMethod('wire', this)">Current Wire (F = BIL sinθ)</button>
+              <button class="method-tab" onclick="switchMagMethod('charge', this)">Moving Charge (F = qvB sinθ)</button>
+            </div>
+            <div id="mag-wire">
+              <div class="input-row">
+                <div class="input-group">
+                  <label>Magnetic Field (B) <span class="unit-tag">Tesla T</span></label>
+                  <input type="number" id="mw-B" placeholder="e.g. 0.5" step="any" />
+                </div>
+                <div class="input-group">
+                  <label>Current (I) <span class="unit-tag">Amperes A</span></label>
+                  <input type="number" id="mw-I" placeholder="e.g. 3" step="any" />
+                </div>
+                <div class="input-group">
+                  <label>Length (L) <span class="unit-tag">Meters m</span></label>
+                  <input type="number" id="mw-L" placeholder="e.g. 0.2" step="any" />
+                </div>
+                <div class="input-group">
+                  <label>Angle (θ) <span class="unit-tag">Degrees °</span></label>
+                  <input type="number" id="mw-theta" placeholder="e.g. 90" step="any" value="90" />
+                </div>
+              </div>
+            </div>
+            <div id="mag-charge" style="display:none">
+              <div class="input-row">
+                <div class="input-group">
+                  <label>Charge (q) <span class="unit-tag">Coulombs C</span></label>
+                  <input type="number" id="mc-q" placeholder="e.g. 1.6e-19" step="any" />
+                </div>
+                <div class="input-group">
+                  <label>Velocity (v) <span class="unit-tag">m/s</span></label>
+                  <input type="number" id="mc-v" placeholder="e.g. 3e6" step="any" />
+                </div>
+                <div class="input-group">
+                  <label>Magnetic Field (B) <span class="unit-tag">Tesla T</span></label>
+                  <input type="number" id="mc-B" placeholder="e.g. 0.5" step="any" />
+                </div>
+                <div class="input-group">
+                  <label>Angle (θ) <span class="unit-tag">Degrees °</span></label>
+                  <input type="number" id="mc-theta" placeholder="e.g. 90" step="any" value="90" />
+                </div>
+              </div>
+            </div>
+            <button class="calc-btn" onclick="calcMagForce()">Calculate</button>
+            <div class="result-box" id="mag-result"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 — SAMPLE PROBLEMS -->
+  <section id="problems" class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-badge">📝 Worked Examples</div>
+        <h2 class="section-title">Sample Problems</h2>
+        <p class="section-sub">Step-by-step solutions for common Electricity &amp; Magnetism problems.</p>
+      </div>
+      <div class="problems-grid">
+
+        <div class="problem-card">
+          <div class="prob-header"><span class="prob-tag">Ohm's Law</span><span class="prob-num">Problem 1</span></div>
+          <div class="prob-question">A resistor has a resistance of 47 Ω. If a current of 0.5 A flows through it, what is the voltage across it?</div>
+          <div class="prob-solution">
+            <div class="sol-step"><span class="step-num">Given</span><span>R = 47 Ω,&nbsp; I = 0.5 A</span></div>
+            <div class="sol-step"><span class="step-num">Formula</span><span class="mono">V = I × R</span></div>
+            <div class="sol-step"><span class="step-num">Solution</span><span class="mono">V = 0.5 × 47 = 23.5 V</span></div>
+            <div class="sol-answer">✅ Voltage = <strong>23.5 V</strong></div>
+          </div>
+        </div>
+
+        <div class="problem-card">
+          <div class="prob-header"><span class="prob-tag">Electric Power</span><span class="prob-num">Problem 2</span></div>
+          <div class="prob-question">A light bulb operates at 120 V and draws 0.75 A of current. What is its power rating?</div>
+          <div class="prob-solution">
+            <div class="sol-step"><span class="step-num">Given</span><span>V = 120 V,&nbsp; I = 0.75 A</span></div>
+            <div class="sol-step"><span class="step-num">Formula</span><span class="mono">P = V × I</span></div>
+            <div class="sol-step"><span class="step-num">Solution</span><span class="mono">P = 120 × 0.75 = 90 W</span></div>
+            <div class="sol-answer">✅ Power = <strong>90 W</strong></div>
+          </div>
+        </div>
+
+        <div class="problem-card">
+          <div class="prob-header"><span class="prob-tag">Coulomb's Law</span><span class="prob-num">Problem 3</span></div>
+          <div class="prob-question">Two charges, q₁ = +3 μC and q₂ = −2 μC, are placed 0.05 m apart. What is the force between them?</div>
+          <div class="prob-solution">
+            <div class="sol-step"><span class="step-num">Given</span><span>q₁ = 3×10⁻⁶ C,&nbsp; q₂ = 2×10⁻⁶ C,&nbsp; r = 0.05 m</span></div>
+            <div class="sol-step"><span class="step-num">Formula</span><span class="mono">F = kq₁q₂ / r²</span></div>
+            <div class="sol-step"><span class="step-num">Solution</span><span class="mono">F = (8.99×10⁹)(3×10⁻⁶)(2×10⁻⁶) / (0.05)² = 21.576 N</span></div>
+            <div class="sol-answer">✅ Force = <strong>21.58 N</strong> (attractive)</div>
+          </div>
+        </div>
+
+        <div class="problem-card">
+          <div class="prob-header"><span class="prob-tag">Electric Field</span><span class="prob-num">Problem 4</span></div>
+          <div class="prob-question">A point charge of Q = 5 μC creates an electric field at a point 0.3 m away. What is the field strength?</div>
+          <div class="prob-solution">
+            <div class="sol-step"><span class="step-num">Given</span><span>Q = 5×10⁻⁶ C,&nbsp; r = 0.3 m</span></div>
+            <div class="sol-step"><span class="step-num">Formula</span><span class="mono">E = kQ / r²</span></div>
+            <div class="sol-step"><span class="step-num">Solution</span><span class="mono">E = (8.99×10⁹)(5×10⁻⁶) / (0.3)² ≈ 499,444 N/C</span></div>
+            <div class="sol-answer">✅ E ≈ <strong>4.99 × 10⁵ N/C</strong></div>
+          </div>
+        </div>
+
+        <div class="problem-card">
+          <div class="prob-header"><span class="prob-tag">Magnetic Force</span><span class="prob-num">Problem 5</span></div>
+          <div class="prob-question">A wire 0.4 m long carries a current of 5 A in a magnetic field of 0.3 T perpendicular to the wire. Find the force.</div>
+          <div class="prob-solution">
+            <div class="sol-step"><span class="step-num">Given</span><span>B = 0.3 T,&nbsp; I = 5 A,&nbsp; L = 0.4 m,&nbsp; θ = 90°</span></div>
+            <div class="sol-step"><span class="step-num">Formula</span><span class="mono">F = BIL sin θ</span></div>
+            <div class="sol-step"><span class="step-num">Solution</span><span class="mono">F = 0.3 × 5 × 0.4 × sin(90°) = 0.6 N</span></div>
+            <div class="sol-answer">✅ Force = <strong>0.6 N</strong></div>
+          </div>
+        </div>
+
+        <div class="problem-card">
+          <div class="prob-header"><span class="prob-tag">Electric Charge</span><span class="prob-num">Problem 6</span></div>
+          <div class="prob-question">How many electrons must be transferred to give an object a charge of −1.6 × 10⁻¹⁷ C?</div>
+          <div class="prob-solution">
+            <div class="sol-step"><span class="step-num">Given</span><span>Q = 1.6×10⁻¹⁷ C,&nbsp; e = 1.6×10⁻¹⁹ C</span></div>
+            <div class="sol-step"><span class="step-num">Formula</span><span class="mono">n = Q / e</span></div>
+            <div class="sol-step"><span class="step-num">Solution</span><span class="mono">n = 1.6×10⁻¹⁷ / 1.6×10⁻¹⁹ = 100</span></div>
+            <div class="sol-answer">✅ Electrons = <strong>100</strong></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 6 — ABOUT -->
+  <section id="about" class="section">
+    <div class="section-inner">
+      <div class="section-header">
+        <div class="section-badge">👥 Team</div>
+        <h2 class="section-title">About the Developers</h2>
+        <p class="section-sub">ElectroCalc was built as an educational tool combining Physics and Web Development.</p>
+      </div>
+      <div class="about-wrapper">
+
+        <!-- ── Project info card: full width, two-column interior ── -->
+        <div class="about-project">
+          <h3>About This Project</h3>
+          <p><strong>ElectroCalc</strong> is an interactive Electricity and Magnetism problem-solving website designed for students. It provides instant, accurate calculations for core E&amp;M concepts along with formula references and worked examples.</p>
+          <div>
+            <div class="tech-stack">
+              <div class="tech-item">HTML5</div>
+              <div class="tech-item">CSS3</div>
+              <div class="tech-item">JavaScript</div>
+              <div class="tech-item">Google Fonts</div>
+            </div>
+            <div class="references">
+              <h4>References</h4>
+              <ul>
+                <li>Serway &amp; Jewett — <em>Physics for Scientists and Engineers</em>, 10th ed.</li>
+                <li>Halliday, Resnick &amp; Krane — <em>Fundamentals of Physics</em>, 10th ed.</li>
+                <li>NIST CODATA — Fundamental Physical Constants (2018)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ── Team label ── -->
+        <div>
+          <div class="team-section-label">Meet the Team 👋</div>
+          <p class="team-section-sub">The brilliant minds behind ElectroCalc</p>
+
+          <!-- ── 6 Developer cards — 3×2 full-width grid ── -->
+          <div class="team-grid">
+
+            <div class="member-card">
+              <img class = "member-avatar" 
+                src = "assets/euclid.jpg" alt = "Euclid Franconas"
+              />
+              <div class="member-name">Euclid Franconas</div>
+              <div class="member-role">HTML &amp; Layout</div>
+              <p class="member-desc">Responsible for the overall page structure and semantic HTML architecture.</p>
+            </div>
+
+            <div class="member-card">
+              <img class = "member-avatar" 
+                src = "assets/juvy.jpg" alt = "Developer 2"
+              />
+              <div class="member-name">Juvy Ruth Gambong</div>
+              <div class="member-role">CSS &amp; Design</div>
+              <p class="member-desc">Created the visual design, color scheme, typography, and responsive layout.</p>
+            </div>
+
+            <div class="member-card">
+              <img
+                class="member-avatar"
+                src="assets/ahli.jpg"
+                alt="Developer 3 photo"
+              />
+              <div class="member-name">Ahli Josh Del Rosario</div>
+              <div class="member-role">JavaScript Logic</div>
+              <p class="member-desc">Implemented all calculation functions, input validation, and dynamic UI behavior.</p>
+            </div>
+
+            <div class="member-card">
+              <img
+                class="member-avatar"
+                  src="assets/mariane.jpg"
+                    alt="Developer 4 photo"
+              />
+              <div class="member-name">Marian Fernandez</div>
+              <div class="member-role">Physics &amp; Content</div>
+              <p class="member-desc">Verified all formulas, wrote sample problems, and authored explanatory content.</p>
+            </div>
+
+            <div class="member-card">
+              <img class = "member-avatar" 
+                src = "assets/reynold.jpg" 
+                  alt = "Reynold Delos Reyes"
+              />
+              <div class="member-name">Reynold Delos Reyes</div>
+              <div class="member-role">Testing &amp; QA</div>
+              <p class="member-desc">Conducted thorough testing, caught bugs, and ensured accuracy across all calculators and devices.</p>
+            </div>
+
+            <div class="member-card">
+              <img class = "member-avatar"
+                src = "assets/uy.jpg" 
+                  alt = "Esnaira Uy"
+              />
+              <div class="member-name">Esnaira Uy</div>
+              <div class="member-role">Documentation</div>
+              <p class="member-desc">Wrote user guides, in-app help text, and maintained project documentation throughout development.</p>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand"><span class="brand-icon">⚡</span><span>ElectroCalc</span></div>
+      <div class="footer-links">
+        <a href="#home" onclick="navigateTo('home')">Home</a>
+        <a href="#formulas" onclick="navigateTo('formulas')">Formulas</a>
+        <a href="#electricity" onclick="navigateTo('electricity')">Electricity</a>
+        <a href="#magnetism" onclick="navigateTo('magnetism')">Magnetism</a>
+        <a href="#problems" onclick="navigateTo('problems')">Problems</a>
+        <a href="#about" onclick="navigateTo('about')">About</a>
+      </div>
+      <div class="footer-note">Electricity &amp; Magnetism Reference Website · Built with HTML, CSS &amp; JavaScript</div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
