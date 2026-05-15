@@ -37,7 +37,9 @@ function toggleSolution(button) {
   const solutionDiv = button.nextElementSibling;
   if (solutionDiv && solutionDiv.classList.contains('prob-solution')) {
     solutionDiv.classList.toggle('hidden');
-    button.textContent = solutionDiv.classList.contains('hidden') ? 'Show Solution' : 'Hide Solution';
+    const isHidden = solutionDiv.classList.contains('hidden');
+    button.textContent = isHidden ? 'Show Solution' : 'Hide Solution';
+    button.classList.toggle('is-open', !isHidden);
   }
 }
 

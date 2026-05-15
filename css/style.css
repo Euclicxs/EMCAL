@@ -83,7 +83,7 @@ body {
 
 /* Floating science doodles */
 body::before {
-  content: 'âš¡ ðŸ"¬ âš—ï¸ ðŸ'¡ ðŸ§ª ðŸ"­ âš¡ ðŸ§² ðŸ'¡ âš—ï¸';
+  content: 'âš¡ ðŸ"¬ âš—ï¸ ðŸ'¡ ðŸ§ª ðŸ­ ðŸ§² ðŸ'¡ âš—ï¸';
   position: fixed;
   top: 0; left: 0; right: 0;
   font-size: 1.4rem;
@@ -768,8 +768,9 @@ input[type="number"]::placeholder { color: var(--text-muted); font-weight: 600; 
 .sol-answer { margin-top: 1.25rem; padding: 0.9rem 1.25rem; background: var(--accent-3-light); border: 2.5px solid var(--accent-3); border-radius: var(--radius-md); font-size: 0.93rem; font-weight: 800; color: #1b5e20; }
 
 .toggle-solution-btn {
-  display: inline-block;
-  margin: 1.25rem 1.75rem 0 1.75rem;
+  display: block;
+  width: calc(100% - 3.5rem);
+  margin: 1.25rem 1.75rem 1.25rem 1.75rem;
   padding: 0.9rem 1.8rem;
   background: var(--accent-2);
   color: white;
@@ -782,6 +783,7 @@ input[type="number"]::placeholder { color: var(--text-muted); font-weight: 600; 
   box-shadow: 0 3px 0 #1565c0, 0 6px 12px rgba(33, 150, 243, 0.2);
   text-transform: uppercase;
   letter-spacing: 0.05em;
+  text-align: center;
 }
 
 .toggle-solution-btn:hover {
@@ -793,6 +795,17 @@ input[type="number"]::placeholder { color: var(--text-muted); font-weight: 600; 
 .toggle-solution-btn:active {
   transform: translateY(1px);
   box-shadow: 0 1px 0 #1565c0, 0 3px 8px rgba(33, 150, 243, 0.2);
+}
+
+/* When solution is visible, tint the button green to signal "click to hide" */
+.toggle-solution-btn.is-open {
+  background: var(--accent-3);
+  box-shadow: 0 3px 0 #00a844, 0 6px 12px rgba(0, 200, 83, 0.2);
+}
+
+.toggle-solution-btn.is-open:hover {
+  background: #00c853;
+  box-shadow: 0 4px 0 #00a844, 0 8px 16px rgba(0, 200, 83, 0.3);
 }
 
 .prob-solution.hidden {
