@@ -293,7 +293,7 @@
             </div>
             <div class="input-group">
               <label>Resistance (R) <span class="unit-tag">Ohms Ω</span></label>
-              <input type="number" id="pwr-R" placeholder="eg 5" step="any" />
+              <input type="number" id="pwr-R" placeholder="e.g. 5" step="any" />
             </div>
             <button class="calc-btn" onclick="calcPower()">Calculate</button>
             <div class="result-box" id="pwr-result"></div>
@@ -522,7 +522,8 @@
         <div class="problem-card">
           <div class="prob-header"><span class="prob-tag">Ohm's Law</span><span class="prob-num">Problem 1</span></div>
           <div class="prob-question">A resistor has a resistance of 47 Ω. If a current of 0.5 A flows through it, what is the voltage across it?</div>
-          <div class="prob-solution">
+          <button class="toggle-solution-btn" onclick="toggleSolution(this)">Show Solution</button>
+          <div class="prob-solution hidden">
             <div class="sol-step"><span class="step-num">Given</span><span>R = 47 Ω,&nbsp; I = 0.5 A</span></div>
             <div class="sol-step"><span class="step-num">Formula</span><span class="mono">V = I × R</span></div>
             <div class="sol-step"><span class="step-num">Solution</span><span class="mono">V = 0.5 × 47 = 23.5 V</span></div>
@@ -533,7 +534,8 @@
         <div class="problem-card">
           <div class="prob-header"><span class="prob-tag">Electric Power</span><span class="prob-num">Problem 2</span></div>
           <div class="prob-question">A light bulb operates at 120 V and draws 0.75 A of current. What is its power rating?</div>
-          <div class="prob-solution">
+          <button class="toggle-solution-btn" onclick="toggleSolution(this)">Show Solution</button>
+          <div class="prob-solution hidden">
             <div class="sol-step"><span class="step-num">Given</span><span>V = 120 V,&nbsp; I = 0.75 A</span></div>
             <div class="sol-step"><span class="step-num">Formula</span><span class="mono">P = V × I</span></div>
             <div class="sol-step"><span class="step-num">Solution</span><span class="mono">P = 120 × 0.75 = 90 W</span></div>
@@ -544,7 +546,8 @@
         <div class="problem-card">
           <div class="prob-header"><span class="prob-tag">Coulomb's Law</span><span class="prob-num">Problem 3</span></div>
           <div class="prob-question">Two charges, q₁ = +3 μC and q₂ = −2 μC, are placed 0.05 m apart. What is the force between them?</div>
-          <div class="prob-solution">
+          <button class="toggle-solution-btn" onclick="toggleSolution(this)">Show Solution</button>
+          <div class="prob-solution hidden">
             <div class="sol-step"><span class="step-num">Given</span><span>q₁ = 3×10⁻⁶ C,&nbsp; q₂ = 2×10⁻⁶ C,&nbsp; r = 0.05 m</span></div>
             <div class="sol-step"><span class="step-num">Formula</span><span class="mono">F = kq₁q₂ / r²</span></div>
             <div class="sol-step"><span class="step-num">Solution</span><span class="mono">F = (8.99×10⁹)(3×10⁻⁶)(2×10⁻⁶) / (0.05)² = 21.576 N</span></div>
@@ -555,7 +558,8 @@
         <div class="problem-card">
           <div class="prob-header"><span class="prob-tag">Electric Field</span><span class="prob-num">Problem 4</span></div>
           <div class="prob-question">A point charge of Q = 5 μC creates an electric field at a point 0.3 m away. What is the field strength?</div>
-          <div class="prob-solution">
+          <button class="toggle-solution-btn" onclick="toggleSolution(this)">Show Solution</button>
+          <div class="prob-solution hidden">
             <div class="sol-step"><span class="step-num">Given</span><span>Q = 5×10⁻⁶ C,&nbsp; r = 0.3 m</span></div>
             <div class="sol-step"><span class="step-num">Formula</span><span class="mono">E = kQ / r²</span></div>
             <div class="sol-step"><span class="step-num">Solution</span><span class="mono">E = (8.99×10⁹)(5×10⁻⁶) / (0.3)² ≈ 499,444 N/C</span></div>
@@ -566,7 +570,8 @@
         <div class="problem-card">
           <div class="prob-header"><span class="prob-tag">Magnetic Force</span><span class="prob-num">Problem 5</span></div>
           <div class="prob-question">A wire 0.4 m long carries a current of 5 A in a magnetic field of 0.3 T perpendicular to the wire. Find the force.</div>
-          <div class="prob-solution">
+          <button class="toggle-solution-btn" onclick="toggleSolution(this)">Show Solution</button>
+          <div class="prob-solution hidden">
             <div class="sol-step"><span class="step-num">Given</span><span>B = 0.3 T,&nbsp; I = 5 A,&nbsp; L = 0.4 m,&nbsp; θ = 90°</span></div>
             <div class="sol-step"><span class="step-num">Formula</span><span class="mono">F = BIL sin θ</span></div>
             <div class="sol-step"><span class="step-num">Solution</span><span class="mono">F = 0.3 × 5 × 0.4 × sin(90°) = 0.6 N</span></div>
@@ -577,7 +582,8 @@
         <div class="problem-card">
           <div class="prob-header"><span class="prob-tag">Electric Charge</span><span class="prob-num">Problem 6</span></div>
           <div class="prob-question">How many electrons must be transferred to give an object a charge of −1.6 × 10⁻¹⁷ C?</div>
-          <div class="prob-solution">
+          <button class="toggle-solution-btn" onclick="toggleSolution(this)">Show Solution</button>
+          <div class="prob-solution hidden">
             <div class="sol-step"><span class="step-num">Given</span><span>Q = 1.6×10⁻¹⁷ C,&nbsp; e = 1.6×10⁻¹⁹ C</span></div>
             <div class="sol-step"><span class="step-num">Formula</span><span class="mono">n = Q / e</span></div>
             <div class="sol-step"><span class="step-num">Solution</span><span class="mono">n = 1.6×10⁻¹⁷ / 1.6×10⁻¹⁹ = 100</span></div>

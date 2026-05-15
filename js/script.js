@@ -33,6 +33,14 @@ function val(id) {
   return isNaN(v) ? null : v;
 }
 
+function toggleSolution(button) {
+  const solutionDiv = button.nextElementSibling;
+  if (solutionDiv && solutionDiv.classList.contains('prob-solution')) {
+    solutionDiv.classList.toggle('hidden');
+    button.textContent = solutionDiv.classList.contains('hidden') ? 'Show Solution' : 'Hide Solution';
+  }
+}
+
 function fmt(num) {
   if (num === 0) return '0';
   const abs = Math.abs(num);

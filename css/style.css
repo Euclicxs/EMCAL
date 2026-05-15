@@ -741,7 +741,7 @@ input[type="number"]::placeholder { color: var(--text-muted); font-weight: 600; 
 .sp-source { fill: none; stroke: var(--accent-2); stroke-width: 2; }
 
 /* ─── SAMPLE PROBLEMS ──────────────────────────────────────── */
-.problems-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.75rem; }
+.problems-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 2rem; }
 .problem-card {
   background: #fff;
   border: 3px solid var(--border-bright);
@@ -749,21 +749,55 @@ input[type="number"]::placeholder { color: var(--text-muted); font-weight: 600; 
   overflow: hidden;
   transition: all var(--transition);
   box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
 }
 .problem-card:nth-child(2) { border-color: var(--accent-2); box-shadow: var(--shadow-blue); }
 .problem-card:nth-child(3) { border-color: var(--pink);     box-shadow: var(--shadow-pink); }
 .problem-card:hover { transform: translateY(-5px) rotate(0.5deg); box-shadow: 0 12px 30px rgba(0,0,0,0.1); }
 
-.prob-header { display: flex; justify-content: space-between; align-items: center; padding: 0.85rem 1.5rem; background: #fffde7; border-bottom: 2px dashed var(--border); }
-.prob-tag { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--orange); }
-.prob-num { font-size: 0.75rem; font-weight: 700; color: var(--text-muted); }
-.prob-question { padding: 1.25rem 1.5rem; font-size: 0.92rem; font-weight: 600; color: var(--text-primary); line-height: 1.7; border-bottom: 2px dashed var(--border); }
-.prob-solution { padding: 1.25rem 1.5rem; }
-.sol-step { display: flex; gap: 0.9rem; align-items: flex-start; padding: 0.5rem 0; border-bottom: 1px dashed rgba(0,0,0,0.08); font-size: 0.83rem; }
-.step-num { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); min-width: 56px; padding-top: 2px; letter-spacing: 0.05em; }
+.prob-header { display: flex; justify-content: space-between; align-items: center; padding: 1rem 1.75rem; background: #fffde7; border-bottom: 2px dashed var(--border); }
+.prob-tag { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: var(--orange); }
+.prob-num { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); }
+.prob-question { padding: 1.5rem 1.75rem; font-size: 1rem; font-weight: 600; color: var(--text-primary); line-height: 1.8; border-bottom: 2px dashed var(--border); }
+.prob-solution { padding: 1.5rem 1.75rem; flex-grow: 1; }
+.sol-step { display: flex; gap: 1rem; align-items: flex-start; padding: 0.7rem 0; border-bottom: 1px dashed rgba(0,0,0,0.08); font-size: 0.88rem; }
+.step-num { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; color: var(--text-muted); min-width: 62px; padding-top: 2px; letter-spacing: 0.05em; }
 .sol-step span:last-child { color: var(--text-sec); font-weight: 600; }
-.mono { font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-primary); line-height: 1.7; }
-.sol-answer { margin-top: 1rem; padding: 0.75rem 1rem; background: var(--accent-3-light); border: 2.5px solid var(--accent-3); border-radius: var(--radius-md); font-size: 0.88rem; font-weight: 800; color: #1b5e20; }
+.mono { font-family: var(--font-mono); font-size: 0.9rem; color: var(--text-primary); line-height: 1.8; }
+.sol-answer { margin-top: 1.25rem; padding: 0.9rem 1.25rem; background: var(--accent-3-light); border: 2.5px solid var(--accent-3); border-radius: var(--radius-md); font-size: 0.93rem; font-weight: 800; color: #1b5e20; }
+
+.toggle-solution-btn {
+  display: inline-block;
+  margin: 1.25rem 1.75rem 0 1.75rem;
+  padding: 0.9rem 1.8rem;
+  background: var(--accent-2);
+  color: white;
+  border: none;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all var(--transition);
+  box-shadow: 0 3px 0 #1565c0, 0 6px 12px rgba(33, 150, 243, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.toggle-solution-btn:hover {
+  background: #1976d2;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 0 #1565c0, 0 8px 16px rgba(33, 150, 243, 0.3);
+}
+
+.toggle-solution-btn:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 0 #1565c0, 0 3px 8px rgba(33, 150, 243, 0.2);
+}
+
+.prob-solution.hidden {
+  display: none;
+}
 
 /* ─── ABOUT ────────────────────────────────────────────────── */
 
